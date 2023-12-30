@@ -1,7 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import generics
+from .serializers import CodeSerializer, AccountSerializer
+from .models import Code, Account
 
 # Create your views here.
-def main(request):
-    return HttpResponse("Hello World!")
-    
+class CodeView(generics.ListAPIView):
+    queryset = Code.objects.all()
+    serializer_class = CodeSerializer
+
+class AccountView(generics.ListAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
